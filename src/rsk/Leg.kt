@@ -1,3 +1,3 @@
 package rsk
 
-class Leg(val vertex: String, var shortestDistFromStart: Int, var previousVertex: String, var visited: Boolean) {}
+data class Leg(val vertex: String, var shortestDistFromStart: Int, var previousVertex: String, var visited: Boolean)

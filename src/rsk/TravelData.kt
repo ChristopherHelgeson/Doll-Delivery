@@ -1,6 +1,6 @@
 package rsk
 
-class TravelData (startingLocation: String, targetLocation: String, edges: List<Map<String, Any>>) {}
+class TravelData (startingLocation: String, targetLocation: String, edges: List<Map<String, Any>>)
 
 fun buildTravelDataSet (): MutableList<Leg?> {
 
@@ -37,4 +37,5 @@ fun printTravelData (legs: MutableList<Leg?>) {
     for (leg in legs) {
         println("vertex: ${leg?.vertex}, shortestDistFromStart: ${leg?.shortestDistFromStart}, previousVertex: ${leg?.previousVertex}, visited?: ${leg?.visited}")
     }
+    println()
 }
