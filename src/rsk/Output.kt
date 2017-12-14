@@ -22,8 +22,7 @@ fun traceBackToStart(): MutableList<String> {
     return path
 }
 
-fun buildResultMap (path: MutableList<String>)
-        : Map<String, Any> {
+fun buildResultMap (path: MutableList<String>): Map<String, Any> {
 
     val shortestRoute = legs
             .filter { it -> it.vertex == targetLocation }

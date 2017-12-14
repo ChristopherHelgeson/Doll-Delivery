@@ -27,7 +27,10 @@ fun buildRouteTree () : MutableList<Leg> {
 fun printTravelData () {
 
     for (leg in legs) {
-        println("vertex: ${leg?.vertex}, shortestDistFromStart: ${leg?.shortestDistFromStart}, previousVertex: ${leg?.previousVertex}, visited?: ${leg?.visited}")
+        println("vertex: ${leg.vertex.padEnd(20)} " +
+                "shortestDistFromStart: ${leg.shortestDistFromStart.toString().padEnd(11)} " +
+                "previousVertex: ${leg.previousVertex.padEnd(20)} " +
+                "visited?: ${leg.visited}")
     }
     println()
 }

@@ -10,8 +10,6 @@ fun dijkstra(startingLocation: String,
              edges: List<Map<String, Any>>)
         : Map<String, Any> {
 
-    buildRouteTree()
-
     return explore()
 }
 

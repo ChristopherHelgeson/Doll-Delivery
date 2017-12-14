@@ -2,14 +2,15 @@ package rsk
 
 fun explore(): Map<String, Any> {
 
+    buildRouteTree()
+
     for (i in 1..legs.count()) {
 
         // set starting vertex to closest unvisited vertex
-        val sortedTravelData = legs
+        val currentLocation = legs
                 .filter { !it.visited}
                 .sortedBy { it.shortestDistFromStart }
-
-        val currentLocation = sortedTravelData[0].vertex
+                .map{it.vertex}.first().toString()
 
         // find all neighbors to current vertex
         val neighbors = edges
@@ -23,7 +24,7 @@ fun explore(): Map<String, Any> {
 
         println("\ncurrentLocation: $currentLocation")
         println("currentDistFromStart: $currentDistFromStart")
-        println("neighbors and distance from here:")
+        println("unvisited neighbors (if any) and their distance from here:")
 
         for (neighbor in neighbors) {
 
@@ -31,15 +32,19 @@ fun explore(): Map<String, Any> {
             val newDistance = edges
                     .filter { it -> it["startLocation"] == currentLocation && it["endLocation"] == neighbor }
                     .map { it["distance"] }.single().toString().toInt()
-            println("$neighbor, newDistance: $newDistance")
-            var oldDistance = -1
+
+            var oldDistance = Int.MIN_VALUE
             // get currently stored distance from current vertex to this neighbor (maxValue at init), if not visited before
             if (legs.filter { it.vertex == neighbor && !it.visited }.isNotEmpty()){
                 oldDistance = legs
                         .filter { it -> it.vertex == neighbor && !it.visited }
                         .map { it.shortestDistFromStart }.single().toInt()
             }
-            println("$neighbor, oldDistance: $oldDistance")
+
+            if (oldDistance > Int.MIN_VALUE) {
+                println("$neighbor, newDistance: $newDistance")
+                println("$neighbor, oldDistance: $oldDistance")
+            }
 
             if (currentDistFromStart + newDistance < oldDistance) {
 
