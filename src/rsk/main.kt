@@ -10,11 +10,9 @@ fun dijkstra(startingLocation: String,
              edges: List<Map<String, Any>>)
         : Map<String, Any> {
 
-    val legs = buildTravelDataSet()
+    buildRouteTree()
 
-    val expectedOutput = explore(startingLocation, targetLocation, edges, legs)
-
-    return expectedOutput
+    return explore()
 }
 
 

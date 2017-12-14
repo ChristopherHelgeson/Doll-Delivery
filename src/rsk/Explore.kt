@@ -1,19 +1,15 @@
 package rsk
 
-fun explore(startingLocation: String,
-            targetLocation: String,
-            edges: List<Map<String, Any?>>,
-            legs: MutableList<Leg?>)
-        : Map<String, Any> {
+fun explore(): Map<String, Any> {
 
     for (i in 1..legs.count()) {
 
         // set starting vertex to closest unvisited vertex
         val sortedTravelData = legs
-                .filter { it?.visited == false }
-                .sortedBy { it?.shortestDistFromStart }
+                .filter { !it.visited}
+                .sortedBy { it.shortestDistFromStart }
 
-        val currentLocation = sortedTravelData[0]?.vertex
+        val currentLocation = sortedTravelData[0].vertex
 
         // find all neighbors to current vertex
         val neighbors = edges
@@ -22,8 +18,8 @@ fun explore(startingLocation: String,
 
         // get how far we have come so far
         val currentDistFromStart = legs
-                .filter { it -> it?.vertex == currentLocation }
-                .map { it?.shortestDistFromStart }.single()!!.toInt()
+                .filter { it -> it.vertex == currentLocation }
+                .map { it.shortestDistFromStart }.single().toInt()
 
         println("\ncurrentLocation: $currentLocation")
         println("currentDistFromStart: $currentDistFromStart")
@@ -38,35 +34,27 @@ fun explore(startingLocation: String,
             println("$neighbor, newDistance: $newDistance")
             var oldDistance = -1
             // get currently stored distance from current vertex to this neighbor (maxValue at init), if not visited before
-            try {
+            if (legs.filter { it.vertex == neighbor && !it.visited }.isNotEmpty()){
                 oldDistance = legs
-                        .filter { it -> it?.vertex == neighbor && it?.visited == false }
-                        .map { it?.shortestDistFromStart }.single()!!.toInt()
-            } catch (e: Exception) {
-                println(e)
+                        .filter { it -> it.vertex == neighbor && !it.visited }
+                        .map { it.shortestDistFromStart }.single().toInt()
             }
             println("$neighbor, oldDistance: $oldDistance")
 
             if (currentDistFromStart + newDistance < oldDistance) {
 
                 // update distance from start
-                legs.find { it -> it?.vertex == neighbor }.let { it?.shortestDistFromStart = currentDistFromStart + newDistance }
+                legs.find { it -> it.vertex == neighbor }.let { it?.shortestDistFromStart = currentDistFromStart + newDistance }
 
                 // update previous vertex to equal where we are now
-                legs.find { it -> it?.vertex == neighbor }.let { it?.previousVertex = currentLocation.toString() }
+                legs.find { it -> it.vertex == neighbor }.let { it?.previousVertex = currentLocation}
             }
         }
 
-        legs.find { it -> it?.vertex == currentLocation }.let { it?.visited = true }
+        legs.find { it -> it.vertex == currentLocation }.let { it?.visited = true }
 
         println("\nAfter visiting $currentLocation:\n")
-
-        printTravelData(legs)
+        printTravelData()
     }
-
-    val expectedOutput: Map<String, Any> = buildResultString (legs)
-
-    //expectedOutput: Map<String, Any> = mapOf("distance" to 31, "path" to "Kruthika's abode => Brian's apartment => Wesley's condo => Byrce's den => Craig's haunt")
-
-    return expectedOutput
+    return buildResultString ()
 }
