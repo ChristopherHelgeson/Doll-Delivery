@@ -39,7 +39,7 @@ fun explore(startingLocation: String, targetLocation: String, edges: List<Map<St
 
             var oldDistance = Int.MIN_VALUE
             // get currently stored distance from current vertex to this neighbor (maxValue at init), if not visited before
-            if (legs.filter { it.vertex == neighbor && !it.visited }.isNotEmpty()){
+            if (legs.any { it.vertex == neighbor && !it.visited }){
                 oldDistance = legs
                         .asSequence()
                         .filter { it -> it.vertex == neighbor && !it.visited }
