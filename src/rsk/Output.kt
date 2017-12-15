@@ -13,7 +13,6 @@ fun traceBackToStart(startingLocation: String, targetLocation: String, legs: Mut
     var previous = ""
     while (previous != startingLocation) {
         previous = legs
-                .asSequence()
                 .filter { it -> it.vertex == currentSpot }
                 .map { it.previousVertex }.single().toString()
         path.add(previous)
@@ -26,7 +25,6 @@ fun traceBackToStart(startingLocation: String, targetLocation: String, legs: Mut
 fun buildResultMap (targetLocation: String, path: MutableList<String>, legs: MutableList<Leg>): Map<String, Any> {
 
     val shortestRoute = legs
-            .asSequence()
             .filter { it -> it.vertex == targetLocation }
             .map { it.shortestDistFromStart }.single().toString().toInt()
 

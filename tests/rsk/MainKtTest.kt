@@ -3,8 +3,7 @@ package rsk
 import org.junit.Assert.*
 import org.junit.Test
 
-class InputTest {
-
+class MainKtTest{
 //    // startingLocation tests:
 //
 //    @Test
@@ -35,18 +34,5 @@ class InputTest {
 //                .map{ it["endLocation"] }.first()
 //        println(targetInEdges)
 //        assertEquals (targetInEdges, targetLocation)
-//    }
-//
-//    // edges tests:
-//
-//    @Test
-//    fun edgesNotNull() {
-//        assertNotNull(edges)
-//    }
-//
-//    @Test
-//    fun edgesEqualOneOrMore() {
-//        val edgeQty = edges.count()
-//        assertTrue(edgeQty>0)
 //    }
 }

@@ -4,6 +4,8 @@ package rsk
 
 fun buildRouteTree (startingLocation: String, edges: List<Map<String, Any>>) : MutableList<Leg> {
 
+
+
     // create comprehensive list of unique vertices from input data
     val startLocations = edges.map { it["startLocation"] }
             .distinct()
