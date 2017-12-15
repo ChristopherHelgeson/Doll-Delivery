@@ -10,6 +10,20 @@ fun readInputFile(): String {
 
 }
 
+fun extractStartingLocation(inputString: String): String {
+
+    val inputSplit = inputString.split(",")
+    val startString = inputSplit[0].split("\"")
+    return startString[1]
+}
+
+fun extractTargetLocation(inputString: String): String {
+
+    val inputSplit = inputString.split(",")
+    val targetString = inputSplit[1].split("\"")
+    return targetString[1]
+}
+
 fun buildEdgesListMap(inputString: String): MutableList<Map<String, Any>> {
 
     val startLocationMutable = extractStartLocations(inputString)
@@ -65,19 +79,7 @@ fun extractDistances(inputString: String): MutableList<Int> {
     return distanceMutable
 }
 
-fun extractStartingLocation(inputString: String): String {
 
-    val inputSplit = inputString.split(",")
-    val startString = inputSplit[0].split("\"")
-    return startString[1]
-}
-
-fun extractTargetLocation(inputString: String): String {
-
-    val inputSplit = inputString.split(",")
-    val targetString = inputSplit[1].split("\"")
-    return targetString[1]
-}
 
 // These variables were hard-coded before I was using inputStream and printWriter
 // DELETE WHEN COMFORTABLE WITH NEW CODE
