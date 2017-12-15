@@ -8,17 +8,20 @@ fun explore(): Map<String, Any> {
 
         // set starting vertex to closest unvisited vertex
         val currentLocation = legs
+                .asSequence()
                 .filter { !it.visited}
                 .sortedBy { it.shortestDistFromStart }
                 .map{it.vertex}.first().toString()
 
         // find all neighbors to current vertex
         val neighbors = edges
+                .asSequence()
                 .filter { it["startLocation"] == currentLocation }
                 .map { it["endLocation"] }
 
         // get how far we have come so far
         val currentDistFromStart = legs
+                .asSequence()
                 .filter { it -> it.vertex == currentLocation }
                 .map { it.shortestDistFromStart }.single().toInt()
 
@@ -30,6 +33,7 @@ fun explore(): Map<String, Any> {
 
             // get distance from current vertex to this neighbor
             val newDistance = edges
+                    .asSequence()
                     .filter { it -> it["startLocation"] == currentLocation && it["endLocation"] == neighbor }
                     .map { it["distance"] }.single().toString().toInt()
 
@@ -37,6 +41,7 @@ fun explore(): Map<String, Any> {
             // get currently stored distance from current vertex to this neighbor (maxValue at init), if not visited before
             if (legs.filter { it.vertex == neighbor && !it.visited }.isNotEmpty()){
                 oldDistance = legs
+                        .asSequence()
                         .filter { it -> it.vertex == neighbor && !it.visited }
                         .map { it.shortestDistFromStart }.single().toInt()
             }
