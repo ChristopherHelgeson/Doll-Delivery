@@ -1,5 +1,7 @@
 package rsk
 
+import java.io.File
+
 fun buildResultString (startingLocation: String, targetLocation: String, legs: MutableList<Leg>): Map<String, Any> {
     val path = traceBackToStart(startingLocation, targetLocation, legs)
     return buildResultMap(targetLocation, path, legs)
@@ -36,4 +38,10 @@ fun buildResultMap (targetLocation: String, path: MutableList<String>, legs: Mut
     resultPath += path[path.count().minus(1)]
 
     return mapOf("distance" to shortestRoute, "path" to resultPath)
+}
+
+fun writeOutputFile(startingLocation: String, targetLocation: String, edges: MutableList<Map<String, Any>>) {
+
+    val outString: String = (dijkstra(startingLocation, targetLocation, edges)).toString()
+    File("Doll-Delivery_Output_Data.txt").printWriter().use { out -> out.println(outString) }
 }
