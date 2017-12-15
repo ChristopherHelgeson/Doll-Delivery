@@ -2,6 +2,8 @@ package rsk
 
 fun main(args: Array<String>) {
 
+    //return dijkstra(startingLocation, targetLocation, edges)
+
     println(dijkstra(startingLocation, targetLocation, edges))
 }
 
