@@ -1,8 +1,8 @@
 package rsk
 
-var legs = buildRouteTree()
+//var legs = buildRouteTree(edges)
 
-fun buildRouteTree () : MutableList<Leg> {
+fun buildRouteTree (startingLocation: String, edges: List<Map<String, Any>>) : MutableList<Leg> {
 
     // create comprehensive list of unique vertices from input data
     val startLocations = edges.map { it["startLocation"] }
@@ -24,7 +24,7 @@ fun buildRouteTree () : MutableList<Leg> {
     return legs
 }
 
-fun printTravelData () {
+fun printTravelData (legs: MutableList<Leg>) {
 
     for (leg in legs) {
         println("vertex: ${leg.vertex.padEnd(20)} " +

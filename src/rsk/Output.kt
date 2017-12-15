@@ -1,11 +1,11 @@
 package rsk
 
-fun buildResultString (): Map<String, Any> {
-    val path = traceBackToStart()
-    return buildResultMap(path)
+fun buildResultString (startingLocation: String, targetLocation: String, legs: MutableList<Leg>): Map<String, Any> {
+    val path = traceBackToStart(startingLocation, targetLocation, legs)
+    return buildResultMap(targetLocation, path, legs)
 }
 
-fun traceBackToStart(): MutableList<String> {
+fun traceBackToStart(startingLocation: String, targetLocation: String, legs: MutableList<Leg>): MutableList<String> {
 
     val path = mutableListOf<String>()
     var currentSpot = targetLocation
@@ -23,7 +23,7 @@ fun traceBackToStart(): MutableList<String> {
     return path
 }
 
-fun buildResultMap (path: MutableList<String>): Map<String, Any> {
+fun buildResultMap (targetLocation: String, path: MutableList<String>, legs: MutableList<Leg>): Map<String, Any> {
 
     val shortestRoute = legs
             .asSequence()

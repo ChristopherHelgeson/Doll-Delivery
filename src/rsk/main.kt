@@ -10,7 +10,7 @@ fun dijkstra(startingLocation: String,
              edges: List<Map<String, Any>>)
         : Map<String, Any> {
 
-    return explore()
+    return explore(startingLocation, targetLocation, edges)
 }
 
 

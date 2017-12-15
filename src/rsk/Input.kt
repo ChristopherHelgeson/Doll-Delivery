@@ -1,5 +1,7 @@
 package rsk
 
+// these are global variables, rendering many arguments to many functions unnecessary.
+
 val startingLocation: String = "Kruthika's abode"
 val targetLocation: String = "Craig's haunt"
 val edges: List<Map<String, Any>> =

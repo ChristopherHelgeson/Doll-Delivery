@@ -1,8 +1,8 @@
 package rsk
 
-fun explore(): Map<String, Any> {
+fun explore(startingLocation: String, targetLocation: String, edges: List<Map<String, Any>>): Map<String, Any> {
 
-    buildRouteTree()
+    val legs = buildRouteTree(startingLocation, edges)
 
     for (i in 1..legs.count()) {
 
@@ -64,7 +64,7 @@ fun explore(): Map<String, Any> {
         legs.find { it -> it.vertex == currentLocation }.let { it?.visited = true }
 
         println("\nAfter visiting $currentLocation:\n")
-        printTravelData()
+        printTravelData(legs)
     }
-    return buildResultString ()
+    return buildResultString (startingLocation, targetLocation, legs)
 }
